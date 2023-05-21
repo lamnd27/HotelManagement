@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GCC200145-HotelManagement.iml" filepath="$PROJECT_DIR$/GCC200145-HotelManagement.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GCC200145_HotelManagement.iml" filepath="$PROJECT_DIR$/GCC200145_HotelManagement.iml" />
     </modules>
   </component>
 </project>

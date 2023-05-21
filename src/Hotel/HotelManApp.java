@@ -283,7 +283,7 @@ public class HotelManApp extends JFrame{
 
     }
     public static void main(String[] args) {
-        HotelManApp h = new HotelManApp("acdd");
+        HotelManApp h = new HotelManApp("Hotel Management");
         h.setVisible(true);
         h.setLocationRelativeTo(null);
     }

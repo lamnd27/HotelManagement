@@ -13,15 +13,15 @@ public class login extends JFrame{
     private JButton cancelButton;
     private JButton loginButton;
 
-    public login(String login) {
-        super("title");
+    public login(String title) {
+        super(title);
         this.setContentPane(mainPanel);
         this.setLocationRelativeTo(null);
         this.pack();
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                login();
+                logIn();
 
             }
         });
@@ -35,7 +35,7 @@ public class login extends JFrame{
             }
         });
     }
-    private void login() {
+    private void logIn() {
         String name = txtUsername.getText();
         String pass = String.valueOf(txtPassword.getPassword());
         HotelManApp hotelManApp = null;
@@ -45,7 +45,7 @@ public class login extends JFrame{
         boolean login = false;
 
         if (admin.equals(checkUser)){
-            hotelManApp = new HotelManApp(name);
+            hotelManApp = new HotelManApp("Hotel Management");
             login = true;
         }
         if (login) {
