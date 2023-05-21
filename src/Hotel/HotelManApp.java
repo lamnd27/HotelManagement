@@ -282,9 +282,9 @@ public class HotelManApp extends JFrame{
         tbManage.setModel(tableModel);
 
     }
-    public static void main(String[] args) {
-        HotelManApp h = new HotelManApp("Hotel Management");
-        h.setVisible(true);
-        h.setLocationRelativeTo(null);
-    }
+//    public static void main(String[] args) {
+//        HotelManApp h = new HotelManApp("Hotel Management");
+//        h.setVisible(true);
+//        h.setLocationRelativeTo(null);
+//    }
 }
