@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class HotelManApp extends JFrame{
     private JTable tbManage;
@@ -29,6 +31,7 @@ public class HotelManApp extends JFrame{
     private JTextField txtRoom;
     private JButton refreshButton;
     private JButton OKButton;
+    private JButton sortByNameButton;
 
     //custom instance variable
 
@@ -93,37 +96,34 @@ public class HotelManApp extends JFrame{
             }
         });
 
+        sortByNameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sortByName();fillToTable();
+            }
+        });
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int re = JOptionPane.showConfirmDialog(HotelManApp.this,"Are you sure?", "Exit?",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+                if (re == JOptionPane.YES_NO_OPTION){
+                    System.exit(0);
+                }
+            }
+        });
 
-//        btnSba.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                sortByEver();fillToTable();
-//            }
-//        });
-//        btnSbn.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                sortByName();fillToTable();
-//            }
-//        });
+
+
     }
-//    private void sortByName() {
-//        Collections.sort(canList, new Comparator<Candidate>() {
-//            @Override
-//            public int compare(Candidate o1, Candidate o2) {
-//                return o1.getName().compareTo(o2.getName());
-//            }
-//        });
-//    }
-//
-//    private void sortByEver() {
-//        Collections.sort(canList, new Comparator<Candidate>() {
-//            @Override
-//            public int compare(Candidate o1, Candidate o2) {
-//                return o1.getAverage()<o2.getAverage()?1:-1;
-//            }
-//        });
-//    }
+    private void sortByName() {
+        Collections.sort(hotelManArrayList, new Comparator<HotelMan>() {
+           @Override
+            public int compare(HotelMan o1, HotelMan o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+    }
+
     private void roomCode() {
         String floor = comboBoxFloor.getSelectedItem().toString();
         String room = comboBoxRoom.getSelectedItem().toString();
@@ -173,16 +173,22 @@ public class HotelManApp extends JFrame{
         HotelMan h = hotelManArrayList.get(currentRow);
         String id = txtID.getText();
         h.setID(id);
+
         String name=txtName.getText();
         h.setName(name);
+
         String phone = txtPhone.getText();
         h.setPhone(phone);
+
         String room = txtRoom.getText();
-        h.setPhone(room);
+        h.setRoom(room);
+
         String checkIn = txtCheckIn.getText();
-        h.setPhone(checkIn);
+        h.setCheckIn(checkIn);
+
         String checkOut = txtCheckOut.getText();
-        h.setPhone(checkOut);
+        h.setCheckOut(checkOut);
+
         Boolean gen=femaleRadioButton.isSelected();
         h.setGender(gen);
 
@@ -191,19 +197,26 @@ public class HotelManApp extends JFrame{
         HotelMan h = hotelManArrayList.get(currentRow);
         String id = h.getID();
         txtID.setText(id);
+
         String name = h.getName();
         txtName.setText(name);
+
         String phone = h.getPhone();
         txtPhone.setText(phone);
+
         String room = h.getRoom();
         txtRoom.setText(room);
+
         comboBoxFloor.setSelectedItem(room.substring(0,1));
         comboBoxRoom.setSelectedItem(room.substring(1));
+
         Boolean gen=h.getGender();
         femaleRadioButton.setSelected(gen);
         maleRadioButton.setSelected(!gen);
+
         String checkIn = h.getCheckIn();
         txtCheckIn.setText(checkIn);
+
         String checkOut = h.getCheckOut();
         txtCheckOut.setText(checkOut);
 
@@ -239,7 +252,7 @@ public class HotelManApp extends JFrame{
         tableModel.setRowCount(0);
         for (HotelMan h: hotelManArrayList){
             Object[] row = new Object[]{
-                    //h.getID(),h.getName(),h.getGender(),h.getPhone(),h.getRoom(),h.getCheckIn(),h.getCheckOut()
+                    h.getID(),h.getName(),h.getPhone(),h.getGender(),h.getRoom(),h.getCheckIn(),h.getCheckOut()
             };
             tableModel.addRow(row);
         }
@@ -252,7 +265,6 @@ public class HotelManApp extends JFrame{
         return true;
     }
     private void loadCb() {
-        //String[] roomList = {"Choose the room","A01","A02","A03","A04","A05","B01","B02","B03","B04","B05"};
         String[] floorList = {"Choose the floor","A","B"};
         String[] roomList = {"Choose the room","01","02","03","04","05"};
         for(String f:floorList){
@@ -265,7 +277,7 @@ public class HotelManApp extends JFrame{
         comboBoxRoom.setModel(comboBoxModelR);
     }
     private void initTable() {
-        String[] colNames = {"ID","Name","Gender","Phone","Room","CheckIn","CheckOut"};
+        String[] colNames = {"ID","Name","Phone","Gender","Room","CheckIn","CheckOut"};
         tableModel= new DefaultTableModel(colNames,0);
         tbManage.setModel(tableModel);
 
