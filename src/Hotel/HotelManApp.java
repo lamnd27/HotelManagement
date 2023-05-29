@@ -124,7 +124,7 @@ public class HotelManApp extends JFrame{
         });
     }
 
-    private void roomCode() {
+    private void roomCode() { 
         String floor = comboBoxFloor.getSelectedItem().toString();
         String room = comboBoxRoom.getSelectedItem().toString();
         txtRoom.setText(floor+room);
@@ -161,12 +161,11 @@ public class HotelManApp extends JFrame{
 
     }
     private void updateIn4() {
-        //1. update candidate to arraylist with currentRow
+        //1. update to arraylist with currentRow
         updateHotel();
-
-        //2. fillToTable(renewTB)
+        //2. fillToTable
         fillToTable();
-        //3. save arraylist candidate
+        //3. save arraylist
         saveFile();
     }
     private void updateHotel() {
@@ -222,13 +221,12 @@ public class HotelManApp extends JFrame{
 
     }
     private void addHotel() {
-        //1. add new candidate to arraylist
+        //1. add to arraylist
         addToList();
         //2. fillToTable
         fillToTable();
-        //3. save arraylist candidate
+        //3. save arraylist
         saveFile();
-
     }
     private void saveFile() {
         XFile.writeObject(filePath,hotelManArrayList);
